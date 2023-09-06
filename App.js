@@ -1,16 +1,23 @@
-import { View, Image, Pressable } from "react-native";
-const logoImg = require("./assets/adaptive-icon.png");
+import { useState } from "react";
+import { View, Button, Modal, Text } from "react-native";
 
 export default function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <View style={{ flex: 1, backgroundColor: "plum", padding: 60 }}>
-      <Pressable
-        onPress={() => console.log("press")}
-        onPressIn={() => console.log("press in")}
-        onLongPress={() => console.log("long press")}
+      <Button title="Press" onPress={() => setIsModalVisible(true)} />
+      <Modal
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)} // to trigger close on gestures/back
+        animationType="slide"
+        presentationStyle="pageSheet" // only affects ios
       >
-        <Image source={logoImg} style={{ width: 300, height: 300 }} />
-      </Pressable>
+        <View style={{ flex: 1, backgroundColor: "lightblue", padding: 60 }}>
+          <Text>Hi from Modal!</Text>
+          <Button title="Close" onPress={() => setIsModalVisible(false)} />
+        </View>
+      </Modal>
     </View>
   );
 }
