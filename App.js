@@ -1,52 +1,25 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
+import Box from "./components/Box";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={[styles.box, styles.redBg, styles.boxShadow]}>
-        <Text>Box 1</Text>
-      </View>
-      <View style={[styles.box, styles.greenBg, styles.androidShadow]}>
-        <Text>Box 2</Text>
-      </View>
+      <Box style={{ backgroundColor: "lightblue" }}>Box 1</Box>
+      <Box style={{ backgroundColor: "lightgreen" }}>Box 2</Box>
+      <Box style={{ backgroundColor: "orange" }}>Box 3</Box>
+      <Box style={{ backgroundColor: "purple" }}>Box 4</Box>
+      <Box style={{ backgroundColor: "plum" }}>Box 5</Box>
+      <Box style={{ backgroundColor: "grey" }}>Box 6</Box>
+      <Box style={{ backgroundColor: "black" }}>Box 7</Box>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "plum",
-    padding: 60,
-  },
-  box: {
-    width: 250,
-    height: 250,
-    paddingHorizontal: 10,
-    paddingVertical: 30,
-    marginVertical: 10,
-    borderWidth: 2,
-    borderColor: "black",
-    borderRadius: 5,
-  },
-  redBg: {
-    backgroundColor: "red",
-  },
-  greenBg: {
-    backgroundColor: "green",
-  },
-  boxShadow: {
-    shadowColor: "blue",
-    shadowOffset: {
-      width: 6,
-      height: 6,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 4,
-  },
-  androidShadow: {
-    elevation: 10,
-    shadowColor: "blue",
+    marginTop: 64,
+    borderWidth: 6,
+    borderColor: "red",
   },
 });
