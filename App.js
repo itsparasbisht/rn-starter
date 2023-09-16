@@ -16,6 +16,7 @@ export default function App() {
           );
         }}
         keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={<View style={{ height: 10 }} />}
       />
     </View>
   );
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     borderWidth: 2,
-    marginVertical: 6,
   },
   cardText: {
     fontSize: 22,
