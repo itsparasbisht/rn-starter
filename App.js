@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View, FlatList, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  StatusBar,
+  SectionList,
+} from "react-native";
 import pokemonList from "./data.json";
+import groupedPokemonList from "./gruoped-data.json";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <FlatList
+      {/* <FlatList
         data={pokemonList}
         renderItem={({ item }) => {
           return (
@@ -20,6 +28,20 @@ export default function App() {
         ListEmptyComponent={<Text>No items found!</Text>}
         ListHeaderComponent={<Text>Pokemon list</Text>}
         ListFooterComponent={<Text>List ends</Text>}
+      /> */}
+
+      <SectionList
+        sections={groupedPokemonList}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.cardBox}>
+              <Text style={styles.cardText}>{item}</Text>
+            </View>
+          );
+        }}
+        renderSectionHeader={({ section }) => (
+          <Text style={styles.sectionHeaderText}>{section.type}</Text>
+        )}
       />
     </View>
   );
@@ -39,6 +61,11 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 22,
+    fontWeight: "bold",
+  },
+  sectionHeaderText: {
+    backgroundColor: "white",
+    fontSize: 24,
     fontWeight: "bold",
   },
 });
