@@ -1,59 +1,23 @@
-import {
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-} from "react-native";
-import PokemonCard from "./components/PokemonCard";
+import { StyleSheet, Text, View, FlatList, StatusBar } from "react-native";
+import pokemonList from "./data.json";
 
 export default function App() {
-  const charmanderData = {
-    name: "Charmander",
-    image: require("./assets/charmander.png"),
-    type: "Fire",
-    hp: 39,
-    moves: ["Scratch", "Ember", "Growl", "Leer"],
-    weaknesses: ["Water", "Rock"],
-  };
-
-  const squirtleData = {
-    name: "Squirtle",
-    image: require("./assets/squirtle.png"),
-    type: "Water",
-    hp: 44,
-    moves: ["Tackle", "Water Gun", "Tail Whip", "Withdraw"],
-    weaknesses: ["Electric", "Grass"],
-  };
-
-  const bulbasaurData = {
-    name: "Bulbasaur",
-    image: require("./assets/bulbasaur.png"),
-    type: "Grass",
-    hp: 45,
-    moves: ["Tackle", "Vine Whip", "Growl", "Leech Seed"],
-    weaknesses: ["Fire", "Ice", "Flying", "Psychic"],
-  };
-
-  const pikachuData = {
-    name: "Pikachu",
-    image: require("./assets/pikachu.png"),
-    type: "Electric",
-    hp: 35,
-    moves: ["Quick Attack", "Thunderbolt", "Tail Whip", "Growl"],
-    weaknesses: ["Ground"],
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar />
-      <ScrollView>
-        <PokemonCard {...charmanderData} />
-        <PokemonCard {...squirtleData} />
-        <PokemonCard {...bulbasaurData} />
-        <PokemonCard {...pikachuData} />
-      </ScrollView>
-    </SafeAreaView>
+      <FlatList
+        data={pokemonList}
+        renderItem={({ item }) => {
+          return (
+            <View key={item.id} style={styles.cardBox}>
+              <Text style={styles.cardText}>{item.type}</Text>
+              <Text style={styles.cardText}>{item.name}</Text>
+            </View>
+          );
+        }}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
   );
 }
 
@@ -61,6 +25,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    paddingTop: Platform.OS === "android" ? 15 : 0,
+    paddingHorizontal: 10,
+  },
+  cardBox: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 2,
+    marginVertical: 6,
+  },
+  cardText: {
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
