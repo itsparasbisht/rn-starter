@@ -1,13 +1,23 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  Image,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import adpIcon from "./assets/adaptive-icon.png";
 
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.form}>
+        <Image source={adpIcon} style={styles.image} />
         <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
@@ -26,7 +36,7 @@ export default function App() {
         />
         <Button title="Login" onPress={() => {}} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -62,5 +72,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderRadius: 5,
+  },
+  image: {
+    width: 200,
+    height: 400,
+    alignSelf: "center",
+    marginBottom: 50,
   },
 });
