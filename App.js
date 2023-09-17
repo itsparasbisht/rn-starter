@@ -17,6 +17,11 @@ export default function App() {
         // secureTextEntry // when dealing with passwords
         // keyboardType="phone-pad"
       />
+      <TextInput
+        style={[styles.input, styles.multilineText]}
+        placeholder="message"
+        multiline
+      />
       <Text>My name is {name}</Text>
     </View>
   );
@@ -32,5 +37,9 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     borderWidth: 1,
+  },
+  multilineText: {
+    minHeight: 100,
+    textAlignVertical: "top",
   },
 });
