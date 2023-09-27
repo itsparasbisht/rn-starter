@@ -4,18 +4,21 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const BottomSheetViewRN = () => {
   const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["50%"], []);
+  const snapPoints = useMemo(() => ["50%", "70%"], []);
 
   return (
     <View style={styles.container}>
-      <Button title="Close" onPress={() => handleClosePress()} />
+      <Button
+        title="open bottom sheet"
+        onPress={() => sheetRef.current?.snapToIndex(0)}
+      />
       <BottomSheet
         ref={sheetRef}
         snapPoints={snapPoints}
         enablePanDownToClose={true}
       >
-        <BottomSheetView>
-          <Text>Awesome io 🔥</Text>
+        <BottomSheetView style={styles.bottomSheetView}>
+          <Text style={styles.bottomSheetText}>🔥</Text>
         </BottomSheetView>
       </BottomSheet>
     </View>
@@ -25,7 +28,14 @@ const BottomSheetViewRN = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 200,
+  },
+  bottomSheetView: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 100,
+  },
+  bottomSheetText: {
+    fontSize: 100,
   },
 });
 
