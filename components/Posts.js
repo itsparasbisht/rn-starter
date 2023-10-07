@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text, StatusBar, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function getPosts(limit = 10) {
     const response = await fetch(
@@ -10,11 +17,21 @@ export default function Posts() {
     );
     const data = await response.json();
     setPosts(data);
+    setIsLoading(false);
   }
 
   useEffect(() => {
     getPosts();
   }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="black" />
+        <Text style={styles.loadingText}>Loading posts...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -66,5 +83,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     padding: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loadingText: {
+    fontSize: 16,
+    fontWeight: "400",
   },
 });
