@@ -10,6 +10,7 @@ import {
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function getPosts(limit = 10) {
     const response = await fetch(
@@ -23,6 +24,12 @@ export default function Posts() {
   useEffect(() => {
     getPosts();
   }, []);
+
+  function handleRefresh() {
+    setRefreshing(true);
+    getPosts(20);
+    setRefreshing(false);
+  }
 
   if (isLoading) {
     return (
@@ -45,6 +52,8 @@ export default function Posts() {
             </View>
           );
         }}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
         ItemSeparatorComponent={<View style={{ height: 10 }} />}
         ListEmptyComponent={<Text>No posts yet!</Text>}
         ListHeaderComponent={<Text style={styles.listHeader}>Your Posts</Text>}
