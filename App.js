@@ -1,19 +1,17 @@
-import { View, StyleSheet, Text, StatusBar } from "react-native";
-import Posts from "./components/Posts";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AboutScreen from "./screens/AboutScreen";
+import HomeScreen from "./screens/HomeScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Posts />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="About">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    paddingTop: StatusBar.currentHeight,
-    paddingHorizontal: 10,
-  },
-});
