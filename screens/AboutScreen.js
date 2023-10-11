@@ -1,9 +1,15 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-export default function AboutScreen() {
+export default function AboutScreen({ navigation, route }) {
+  const { name } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>About Screen</Text>
+      <Text>About {name}</Text>
+      <Button
+        title="Update the name"
+        onPress={() => navigation.setParams({ name: "John" })}
+      />
     </View>
   );
 }
